@@ -1,9 +1,25 @@
-# Garmez
+# RGLA
+
 Simple 2D graphs engine, for some of my other study projects.
+It also provides some user interaction interface for mouse and keyboard.
 
 You can use it if you want to, with respect to MIT license.
 
-## Things to implement
+## Build
+
+TODO: Write a build script
+
+## Usage
+
+## Tested OS
+
+| OS        | Tested    | Work  | Comment   |
+| --------- | --------- | ----- | --------- |
+| Linux     | ✓         | -     | -         |
+| Windows   | ✗         | -     | -         |
+| OS X      | ✗         | -     | -         |
+
+## Ideas of the features
 
 There are some ideas, not a plan.
 
@@ -11,6 +27,7 @@ There are some ideas, not a plan.
 * Sprites
 * Tiles grid
 * Sprite atlas
+* Blending
 * Custom shaders
 * Per pixel collision
 * BBox collision
@@ -23,7 +40,7 @@ There are some ideas, not a plan.
 
 ## Dependencies
 
-All dependencies are used via custom wrappers to be switched to another implementation in the future.
+All dependencies will be used via custom wrappers to be switched to another implementation in the future.
 
 * OpenGL as basic graphical backend (may be switched to Vulkan)
 * GLFW for cross-platform window creation and IO events
