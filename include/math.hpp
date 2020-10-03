@@ -7,24 +7,28 @@
 #include <glm/gtc/type_ptr.hpp>
 
 namespace RGLA {
-    typedef glm::uvec2 Vec2u;
-    typedef glm::uvec3 Vec3u;
-    typedef glm::uvec4 Vec4u;
-    typedef glm::vec2 Vec2f;
-    typedef glm::vec3 Vec3f;
-    typedef glm::vec4 Vec4f;
+    template<typename T>
+    class GlmWrapper : public T {
+    public:
+        using T::T;
+
+        const auto* GetValuePtr() const { return glm::value_ptr(*(static_cast<const T*>(this))); }
+    };
+
+    typedef GlmWrapper<glm::uvec2> Vec2u;
+    typedef GlmWrapper<glm::uvec3> Vec3u;
+    typedef GlmWrapper<glm::uvec4> Vec4u;
+    typedef GlmWrapper<glm::vec2> Vec2f;
+    typedef GlmWrapper<glm::vec3> Vec3f;
+    typedef GlmWrapper<glm::vec4> Vec4f;
+
+    typedef GlmWrapper<glm::mat2> Mat2;
+    typedef GlmWrapper<glm::mat3> Mat3;
+    typedef GlmWrapper<glm::mat4> Mat4;
+
     typedef Vec2f Vec2;
     typedef Vec3f Vec3;
     typedef Vec4f Vec4;
-    typedef glm::mat2 Mat2;
-    typedef glm::mat3 Mat3;
-
-    class Mat4 : public glm::mat4 {
-    public:
-        using glm::mat4::mat4;
-
-        const auto* GetValuePtr() const { return glm::value_ptr(*(static_cast<const glm::mat4*>(this))); }
-    };
 
     Mat2 IdentityMat2();
     Mat3 IdentityMat3();

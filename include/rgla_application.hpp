@@ -6,6 +6,7 @@
 #include "mesh.hpp"
 #include "shader.hpp"
 #include "texture.hpp"
+#include "quad.hpp"
 
 #include <vector>
 #include <memory>
@@ -18,10 +19,10 @@ namespace RGLA {
 
         bool ProcessFrame() override;
     private:
-        std::unique_ptr<Mesh> _quad;
+        // std::unique_ptr<Mesh> _quad;
+        std::unique_ptr<TexturedQuad> _quad;
         std::unique_ptr<ShaderProgram> _shader;
-        std::unique_ptr<Texture> _texture;
-        std::unique_ptr<Texture> _faceTexture;
+        std::shared_ptr<Texture> _texture;
         TransformMatrix _transformMatrix;
     };
 }
