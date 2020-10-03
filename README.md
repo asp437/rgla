@@ -7,41 +7,19 @@ You can use it if you want to, with respect to MIT license.
 
 ## Build
 
-TODO: Write a build script
+Currently just basic cmake steps. Generate configuration for preffered build system and build it.
 
 ## Usage
 
-## Tested OS
-
-| OS        | Tested    | Work  | Comment   |
-| --------- | --------- | ----- | --------- |
-| Linux     | ✓         | -     | -         |
-| Windows   | ✗         | -     | -         |
-| OS X      | ✗         | -     | -         |
-
-## Ideas of the features
-
-There are some ideas, not a plan.
-
-* Multiple viewpoerts/windows
-* Sprites
-* Tiles grid
-* Sprite atlas
-* Blending
-* Custom shaders
-* Per pixel collision
-* BBox collision
-* Mouse events (clicks and other stuff)
-* Lightning?
-* Z-ordering
-* Sprite as grid of pixels (or even screen as 2D grid of pixels)
-* Font rendering (raster)
-* Font rendering (vector) (use STB for it?)
+Basic example can be found in `rgla_application.{cpp,hpp}`.
+It also use some of the image resources which can be found at learnopengl.com
 
 ## Dependencies
 
-All dependencies will be used via custom wrappers to be switched to another implementation in the future.
+All dependencies (except OpenGL) will be used via custom wrappers to be switched to another implementation in the future.
 
 * OpenGL as basic graphical backend (may be switched to Vulkan)
+* GLM as base for math classes to use with OpenGL
 * GLFW for cross-platform window creation and IO events
-* STB for image formats decoding
+* GLAD for loading OpenGL functions (source code generated at https://glad.dav1d.de/ and placed in this repo)
+* STB for image formats decoding (source code included in this repo)

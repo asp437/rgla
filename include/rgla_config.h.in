@@ -1,0 +1,2 @@
+#define rgla_VERSION_MAJOR @rgla_VERSION_MAJOR@
+#define rgla_VERSION_MINOR @rgla_VERSION_MINOR@
