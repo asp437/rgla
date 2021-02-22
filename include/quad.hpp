@@ -9,6 +9,7 @@ namespace RGLA {
         Quad(Vec2 position, Vec2 size)
             : _mesh(
                 std::vector<Vertex>({
+                    /*posX, posY, posZ,  pad0,  colR, colG, colB, colA,   texU, texV,   pad1, pad2 */
                     {{1.0f, 1.0f, 0.0f}, 0.0f, {1.0f, 1.0f, 1.0f, 1.0f}, {1.0f, 1.0f}, {0.0f, 0.0f}},
                     {{1.0f, 0.0f, 0.0f}, 0.0f, {1.0f, 1.0f, 1.0f, 1.0f}, {1.0f, 0.0f}, {0.0f, 0.0f}},
                     {{0.0f, 0.0f, 0.0f}, 0.0f, {1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f}, {0.0f, 0.0f}},
