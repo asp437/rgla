@@ -27,4 +27,4 @@ All dependencies (except OpenGL) will be used via custom wrappers to be switched
 * GLM as base for math classes to use with OpenGL
 * GLFW for cross-platform window creation and IO events
 * GLAD for loading OpenGL functions (source code generated at https://glad.dav1d.de/ and placed in this repo)
-* STB for image formats decoding (source code included in this repo)
+* STB for image formats decoding (used via git submodule)
