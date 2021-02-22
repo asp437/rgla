@@ -1,20 +1,21 @@
-#include <iostream>
+#include <logging.hpp>
 #include <rgla_config.h>
 #include <application.hpp>
 #include <rgla_application.hpp>
 #include <vertex.hpp>
 
 int main() {
-    std::cout << "OpenGL Playground Version " << rgla_VERSION_MAJOR << "." << rgla_VERSION_MINOR << std::endl;
-    std::cout << "Size of Vertex: " << sizeof(RGLA::Vertex) << std::endl;
+    RGLA::Logger::InitLogger(std::cerr, RGLA::Logger::LoggerLevel::LOG_INFO);
+    RGLA::Logger::LogDebug() << "OpenGL Playground Version " << rgla_VERSION_MAJOR << "." << rgla_VERSION_MINOR << std::endl;
+    RGLA::Logger::LogDebug() << "Size of Vertex: " << sizeof(RGLA::Vertex) << std::endl;
     try {
-        std::cout << "Starting..." << std::endl;
+        RGLA::Logger::LogInfo() << "Starting..." << std::endl;
         RGLA::RGLAApplication app;
-        std::cout << "Entering main loop" << std::endl;
+        RGLA::Logger::LogInfo() << "Entering main loop" << std::endl;
         app.MainLoop();
-        std::cout << "Exiting" << std::endl;
+        RGLA::Logger::LogInfo() << "Exiting" << std::endl;
     } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        RGLA::Logger::LogError() << "Exception: " << e.what() << std::endl;
     }
     return 0;
 }
