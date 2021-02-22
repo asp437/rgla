@@ -17,7 +17,7 @@ Currently just basic cmake steps. Generate configuration for preffered build sys
 ## Usage
 
 Basic example can be found in `rgla_application.{cpp,hpp}`.
-It also use some of the image resources which can be found at learnopengl.com
+It also use some of the image resources which can be found at https://learnopengl.com
 
 ## Dependencies
 
