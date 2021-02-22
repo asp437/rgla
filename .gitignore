@@ -1,2 +1,4 @@
 res
 _build
+.cache
+compile_commands.json

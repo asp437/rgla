@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_DEBUG_POSTFIX d)
 set(OpenGL_GL_PREFERENCE "GLVND")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_FLAGS_DEBUG_INIT "-Wall -g")
 add_compile_options(
@@ -25,6 +26,7 @@ add_executable(
     src/shader.cpp
     src/texture.cpp
     src/math.cpp
+    src/logging.cpp
 )
 set_target_properties(rgla PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
