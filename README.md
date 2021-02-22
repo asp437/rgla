@@ -5,6 +5,11 @@ It also provides some user interaction interface for mouse and keyboard.
 
 You can use it if you want to, with respect to MIT license.
 
+## Dependencies
+
+All dependencies can be installed via [Nix](https://nixos.wiki/wiki/Nix).
+Run `nix-shell` inside source directory.
+
 ## Build
 
 Currently just basic cmake steps. Generate configuration for preffered build system and build it.
