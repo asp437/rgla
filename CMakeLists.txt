@@ -14,11 +14,13 @@ add_compile_options(
     "$<$<CONFIG:DEBUG>:-O0;-g3;-ggdb>"
 )
 
+add_subdirectory(external)
+
 configure_file(include/rgla_config.h.in rgla_config.h)
 
 add_executable(
     rgla
-    src/glad.c
+    # external/glad/src/glad.c
     src/main.cpp
     src/window.cpp
     src/rgla_application.cpp
@@ -39,13 +41,16 @@ target_link_libraries(
     dl
     glm
     OpenGL::GL
+    ${EXTERNAL_LIBS}
 )
 
 target_include_directories(
     rgla
     PUBLIC
     "${PROJECT_BINARY_DIR}"
+    ${EXTERNAL_INCLUDES}
     "include"
+    # "external/glad/include"
 )
 
 add_custom_command(
