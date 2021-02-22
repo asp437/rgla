@@ -5,6 +5,7 @@ project(rgla VERSION 0.1)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_DEBUG_POSTFIX d)
+set(OpenGL_GL_PREFERENCE "GLVND")
 
 set(CMAKE_CXX_FLAGS_DEBUG_INIT "-Wall -g")
 add_compile_options(
