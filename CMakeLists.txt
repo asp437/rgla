@@ -15,26 +15,26 @@ add_compile_options(
 )
 
 add_subdirectory(external)
+add_subdirectory(demo)
 
 configure_file(include/rgla_config.h.in rgla_config.h)
 
-add_executable(
+add_library(
     rgla
-    # external/glad/src/glad.c
-    src/main.cpp
     src/window.cpp
-    src/rgla_application.cpp
     src/mesh.cpp
     src/shader.cpp
     src/texture.cpp
     src/math.cpp
     src/logging.cpp
 )
+
 set_target_properties(rgla PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 find_package(glfw3 3.3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
+
 target_link_libraries(
     rgla
     glfw
@@ -47,22 +47,14 @@ target_link_libraries(
 target_include_directories(
     rgla
     PUBLIC
-    "${PROJECT_BINARY_DIR}"
     ${EXTERNAL_INCLUDES}
     "include"
-    # "external/glad/include"
 )
 
+# Also link in demo
 add_custom_command(
     TARGET rgla POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/shaders
             ${CMAKE_BINARY_DIR}/shaders
-)
-
-add_custom_command(
-    TARGET rgla POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/res
-            ${CMAKE_BINARY_DIR}/res
 )
