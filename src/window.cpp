@@ -7,6 +7,7 @@
 
 namespace RGLA {
     void ResizeCallback(GLFWwindow* window, int width, int height) {
+        RGLA_UNUSED(window);
         if (glViewport) {
             glViewport(0, 0, width, height);
         }
@@ -39,4 +40,4 @@ namespace RGLA {
     bool Window::ShouldBeClosed() const {
         return glfwWindowShouldClose(_window);
     }
-};
+}

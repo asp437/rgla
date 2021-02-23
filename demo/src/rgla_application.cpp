@@ -30,8 +30,8 @@ namespace RGLA {
     }
 
     bool RGLAApplication::ProcessFrame() {
-        float time = glfwGetTime();
-        float brightness = (sin(time) / 2.0f) + 0.5f;
+        // float time = glfwGetTime();
+        // float brightness = (sin(time) / 2.0f) + 0.5f;
         _window->ProcessInput();
 
         glClear(GL_COLOR_BUFFER_BIT);

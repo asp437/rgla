@@ -24,4 +24,6 @@ namespace RGLA {
     static_assert(sizeof(int32) == 4, "int32 size is not 4 byte");
     static_assert(sizeof(uint64) == 8, "uint64 size is not 8 byte");
     static_assert(sizeof(int64) == 8, "int64 size is not 8 byte");
+
+#define RGLA_UNUSED(v) {(void)v;}
 }

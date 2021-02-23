@@ -10,7 +10,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_FLAGS_DEBUG_INIT "-Wall -g")
 add_compile_options(
-    "-Wall" "-Wpedantic" "-Wextra" "-fexceptions"
+    "-Wall" "-Wpedantic" "-Wextra" "-fexceptions" "-Werror"
     "$<$<CONFIG:DEBUG>:-O0;-g3;-ggdb>"
 )
 
@@ -45,9 +45,15 @@ target_link_libraries(
 
 target_include_directories(
     rgla
-    PUBLIC
+    SYSTEM
+    PRIVATE
     ${EXTERNAL_INCLUDES}
-    "include"
+)
+
+target_include_directories(
+    rgla
+    PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 set(RGLA_SHADERS_PATH "${CMAKE_SOURCE_DIR}/shaders")
