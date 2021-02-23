@@ -15,7 +15,6 @@ add_compile_options(
 )
 
 add_subdirectory(external)
-add_subdirectory(demo)
 
 configure_file(include/rgla_config.h.in rgla_config.h)
 
@@ -51,10 +50,12 @@ target_include_directories(
     "include"
 )
 
-# Also link in demo
+set(RGLA_SHADERS_PATH "${CMAKE_SOURCE_DIR}/shaders")
 add_custom_command(
     TARGET rgla POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/shaders
             ${CMAKE_BINARY_DIR}/shaders
 )
+
+add_subdirectory(demo)
