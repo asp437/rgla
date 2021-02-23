@@ -5,7 +5,7 @@ It also provides some user interaction interface for mouse and keyboard.
 
 You can use it if you want to, with respect to MIT license.
 
-## Dependencies
+## Dependencies installation
 
 All dependencies can be installed via [Nix](https://nixos.wiki/wiki/Nix).
 Run `nix-shell` inside source directory.
