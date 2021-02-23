@@ -52,7 +52,6 @@ std::unique_ptr<LoggerWrapper> logger;
 namespace RGLA {
     void Logger::InitLogger(std::ostream& outStream, LoggerLevel level) {
         logger = std::make_unique<LoggerWrapper>(outStream, level);
-        std::cerr << "Logger pointer is " << logger.get() << std::endl;
     }
 
     std::ostream& Logger::Log(LoggerLevel level) {
@@ -62,7 +61,7 @@ namespace RGLA {
             throw std::runtime_error("Logger is not initialized and cannot be used");
         }
 
-        if (level < logger->Level) {
+        if (level > logger->Level) {
             return noopStream;
         }
 
