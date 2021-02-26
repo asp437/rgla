@@ -3,6 +3,7 @@
 #include <application.hpp>
 #include <rgla_application.hpp>
 #include <vertex.hpp>
+#include <sprite.hpp>
 
 int main() {
     RGLA::Logger::InitLogger(std::cerr, RGLA::Logger::LoggerLevel::LOG_INFO);

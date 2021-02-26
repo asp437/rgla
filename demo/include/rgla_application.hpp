@@ -19,10 +19,9 @@ namespace RGLA {
 
         bool ProcessFrame() override;
     private:
-        // std::unique_ptr<Mesh> _quad;
-        std::unique_ptr<TexturedQuad> _quad;
-        std::unique_ptr<ShaderProgram> _shader;
+        std::shared_ptr<ShaderProgram> _shader;
         std::shared_ptr<Texture> _texture;
-        TransformMatrix _transformMatrix;
+        std::unique_ptr<Sprite> _sprite;
+        std::unique_ptr<Sprite> _sprite2;
     };
 }
