@@ -44,4 +44,15 @@ namespace RGLA {
         TransformMatrix& Scale(const Vec3& scale);
         TransformMatrix& Translate(const Vec3& translation);
     };
+
+    template<class T>
+    T Clamp(T value, T low, T high) {
+        if (value < low) {
+            return low;
+        }
+        if (value > high) {
+            return high;
+        }
+        return value;
+    }
 }

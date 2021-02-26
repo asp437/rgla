@@ -34,8 +34,23 @@ namespace RGLA {
             _mesh.Render();
         }
 
+        virtual ~Quad() = default;
+
+        virtual Vec2 GetSize() const {
+            return _size;
+        }
+        virtual Vec2 GetPosition() const {
+            return _position;
+        }
+        virtual void SetSize(Vec2 size) {
+            _size = size;
+        }
+        virtual void SetPosition(Vec2 position) {
+            _position = position;
+        }
     protected:
         virtual void PrepareRender(ShaderProgram& shader) const {
+            shader.Use();
             TransformMatrix transform;
             transform.Scale(Vec3{_size.x, _size.y, 1.0f});
             transform.Translate(Vec3{_position.x, _position.y, 1.0f});

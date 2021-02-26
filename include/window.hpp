@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common.hpp"
+#include "math.hpp"
 
 #include <GLFW/glfw3.h>
 
