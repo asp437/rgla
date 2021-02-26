@@ -86,6 +86,7 @@ namespace RGLA {
     Shader::Shader(const std::string& code, uint type)
         : _type(type)
     {
+        RGLA_UNUSED(_type);
         int success;
         char errorInfo[512];
         const char *codePtr = code.c_str();
