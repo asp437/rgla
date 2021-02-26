@@ -6,8 +6,10 @@
 #include <GLFW/glfw3.h>
 
 #include <memory>
+#include <chrono>
 
 #include "window.hpp"
+#include "logging.hpp"
 
 namespace RGLA {
     class Application {
@@ -30,7 +32,9 @@ namespace RGLA {
                 if (ProcessFrame()) {
                     break;
                 }
+                _framesSinceLastDebugPrint++;
                 glfwPollEvents();
+                PrintDebugInfo();
             }
         }
 
@@ -40,6 +44,16 @@ namespace RGLA {
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             } else {
                 glDisable(GL_BLEND);
+            }
+        }
+
+        virtual void PrintDebugInfo() const {
+            auto now = std::chrono::steady_clock::now();
+            auto dur = now - _lastDebugPrint;
+            if (dur >= std::chrono::seconds(1)) {
+                Logger::LogInfo() << "FPS: " << _framesSinceLastDebugPrint << std::endl;
+                _lastDebugPrint = now;
+                _framesSinceLastDebugPrint = 0;
             }
         }
 
@@ -55,5 +69,8 @@ namespace RGLA {
 
     protected:
         std::unique_ptr<Window> _window;
+
+        mutable std::chrono::time_point<std::chrono::steady_clock> _lastDebugPrint = std::chrono::steady_clock::now();
+        mutable uint32 _framesSinceLastDebugPrint = 0;
     };
 }
