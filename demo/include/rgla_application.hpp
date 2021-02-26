@@ -1,12 +1,12 @@
 #pragma once
 
-#include "application.hpp"
-#include "math.hpp"
-#include "window.hpp"
-#include "mesh.hpp"
-#include "shader.hpp"
-#include "texture.hpp"
-#include "quad.hpp"
+#include <application.hpp>
+#include <math.hpp>
+#include <window.hpp>
+#include <mesh.hpp>
+#include <shader.hpp>
+#include <texture.hpp>
+#include <sprite.hpp>
 
 #include <vector>
 #include <memory>
