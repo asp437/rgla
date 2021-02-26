@@ -11,7 +11,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_FLAGS_DEBUG_INIT "-Wall -g")
 add_compile_options(
     "-Wall" "-Wpedantic" "-Wextra" "-fexceptions" "-Werror"
-    "$<$<CONFIG:DEBUG>:-O0;-g3;-ggdb>"
+    "$<$<CONFIG:DEBUG>:-O1;-g3;-ggdb>"
 )
 
 add_subdirectory(external)
@@ -36,6 +36,7 @@ find_package(glm REQUIRED)
 
 target_link_libraries(
     rgla
+
     glfw
     dl
     glm
@@ -52,7 +53,13 @@ target_include_directories(
 
 target_include_directories(
     rgla
-    PUBLIC
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_include_directories(
+    rgla
+    INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
