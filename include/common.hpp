@@ -26,4 +26,5 @@ namespace RGLA {
     static_assert(sizeof(int64) == 8, "int64 size is not 8 byte");
 
 #define RGLA_UNUSED(v) {(void)v;}
+#define RGLA_ENSURE(v, text) {if (!(v)) { throw std::runtime_error("Ensure failed: "#text); } }
 }
