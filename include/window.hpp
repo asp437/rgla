@@ -12,7 +12,9 @@ namespace RGLA {
         ~Window();
 
         void ProcessInput() const;
+        void ClearWindow() const;
         void SwapBuffers() const;
+        void SetClearColor(Vec4 color) const;
         bool ShouldBeClosed() const;
     private:
         GLFWwindow* _window;

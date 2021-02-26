@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <window.hpp>
+
+#include "window.hpp"
 
 #include <stdexcept>
 #include <iostream>
@@ -27,10 +28,18 @@ namespace RGLA {
         _window = nullptr;
     }
 
+    void Window::SetClearColor(Vec4 color) const {
+        glClearColor(color.r, color.g, color.b, color.a);
+    }
+
     void Window::ProcessInput() const {
         if (glfwGetKey(_window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
             glfwSetWindowShouldClose(_window, true);
         }
+    }
+
+    void Window::ClearWindow() const {
+        glClear(GL_COLOR_BUFFER_BIT);
     }
 
     void Window::SwapBuffers() const {
