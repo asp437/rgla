@@ -21,6 +21,9 @@ namespace RGLA {
     typedef GlmWrapper<glm::vec2> Vec2f;
     typedef GlmWrapper<glm::vec3> Vec3f;
     typedef GlmWrapper<glm::vec4> Vec4f;
+    typedef GlmWrapper<glm::bvec2> Vec2b;
+    typedef GlmWrapper<glm::bvec3> Vec3b;
+    typedef GlmWrapper<glm::bvec4> Vec4b;
 
     typedef GlmWrapper<glm::mat2> Mat2;
     typedef GlmWrapper<glm::mat3> Mat3;

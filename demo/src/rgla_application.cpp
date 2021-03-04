@@ -13,14 +13,23 @@ namespace RGLA {
         _shader = std::make_shared<ShaderProgram>("shaders/basic.vs", "shaders/basic.fs");
         _texture = std::make_shared<FileTexture>("res/container.jpg");
         _inMemoryTexture = std::make_shared<InMemoryTexture>(100, 100, 4);
-        for (int x = 25; x <= 75; x++) {
-            for (int y = 25; y <= 75; y++) {
-                _inMemoryTexture->SetPixel(x, y, 0xFFFFFFFF);
+        for (int x = 0; x < 100; x++) {
+            for (int y = 0; y < 100; y++) {
+                _inMemoryTexture->SetPixel(x, y, 0xff000000);
             }
         }
 
+        for (int x = 25; x <= 75; x++) {
+            for (int y = 25; y <= 75; y++) {
+                _inMemoryTexture->SetPixel(x - 1, y - 1, 0xff0000ff);
+            }
+        }
+        _inMemoryTexture->UpdateData();
+
         _sprite = std::make_unique<Sprite>(_texture, _shader, Vec2{-0.5f, -0.5f});
         _sprite2 = std::make_unique<Sprite>(_inMemoryTexture, _shader, Vec2{-0.2f, -0.2f});
+        _sprite2->SetFilteringMode(TextureFilter::TF_NEAREST);
+        _sprite->SetFilteringMode(TextureFilter::TF_LINEAR);
         SwitchBlending(true);
     }
 
@@ -35,7 +44,18 @@ namespace RGLA {
 
         _sprite->SetOpaque((sin(time) / 2.0f) + 0.5f);
         _sprite->Render();
-        _sprite2->SetOpaque((sin(time + 3.14f) / 2.0f) + 0.5f);
+
+        for (int x = 25; x <= 50; x++) {
+            for (int y = 25; y <= 50; y++) {
+                _inMemoryTexture->SetPixel(x - 1, y - 1, Pixel(
+                    (sin(time) / 2.0f) + 0.5f,
+                    (sin(time / 4.0f) / 2.0f) + 0.5f,
+                    (sin(time / 7.0f) / 2.0f) + 0.5f,
+                    1.0f
+                ));
+            }
+        }
+        _inMemoryTexture->UpdateData();
         _sprite2->Render();
 
         _window->SwapBuffers();

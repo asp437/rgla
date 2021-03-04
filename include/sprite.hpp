@@ -42,6 +42,15 @@ namespace RGLA {
         void SetOpaque(float opaque) {
             _opaque = Clamp(opaque, 0.0f, 1.0f);
         }
+
+        void SetFilteringMode(TextureFilter filter) {
+            Quad::_texture->SetFilteringMode(filter);
+        }
+
+        TextureFilter GetFilteringMode() const {
+            return Quad::_texture->GetFilteringMode();
+        }
+
     private:
         float _brightness = 1.0f;
         float _opaque = 1.0f;
