@@ -22,7 +22,9 @@ namespace RGLA {
         std::shared_ptr<ShaderProgram> _shader;
         std::shared_ptr<Texture> _texture;
         std::shared_ptr<InMemoryTexture> _inMemoryTexture;
+        std::shared_ptr<InMemoryTexture> _textureCopy;
         std::unique_ptr<Sprite> _sprite;
         std::unique_ptr<Sprite> _sprite2;
+        std::unique_ptr<Sprite> _sprite3;
     };
 }

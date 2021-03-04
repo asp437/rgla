@@ -48,6 +48,23 @@ namespace RGLA {
         }
     }
 
+    Pixel Texture::GetPixel(int x, int y) const {
+        if (x < 0 || x >= _width || y < 0 || y >= _height) {
+            throw std::runtime_error("Try to get pixel out of bounds of the texture");
+        }
+        uint32* addr = (uint32*)(_data + (x + y * _width) * _channels);
+        uint32 pixelData = *addr;
+        switch (_channels) {
+            case 3:
+                pixelData = (pixelData & 0xFFFFFF) | 0xFF000000;
+                return Pixel(pixelData);
+            case 4:
+                return Pixel(pixelData);
+        }
+        RGLA_ENSURE(false, "Unsupported channels count in GetPixel()");
+    }
+
+
     TextureFilter Texture::GetFilteringMode() const {
         return TextureFilter::TF_LINEAR; // TODO:
     }
@@ -78,16 +95,21 @@ namespace RGLA {
         BindData();
     }
 
-    InMemoryTexture::~InMemoryTexture() {
-        free(_data);
+    InMemoryTexture::InMemoryTexture(const Texture& texture) {
+        _width = texture.GetWidth();
+        _height = texture.GetHeight();
+        _channels = 4;
+        _data = (unsigned char*) malloc(_width * _height * _channels);
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                SetPixel(x, y, texture.GetPixel(x, y));
+            }
+        }
+        BindData();
     }
 
-    Pixel InMemoryTexture::GetPixel(int x, int y) const {
-        if (x < 0 || x >= _width || y < 0 || y >= _height) {
-            throw std::runtime_error("Try to get pixel out of bounds of the texture");
-        }
-        uint32* addr = (uint32*)(_data + (x + y * _width) * _channels);
-        return Pixel(*addr);
+    InMemoryTexture::~InMemoryTexture() {
+        free(_data);
     }
 
     void InMemoryTexture::SetPixel(int x, int y, Pixel color) {
@@ -96,5 +118,10 @@ namespace RGLA {
         }
         uint32* addr = (uint32*)(_data + (x + y * _width) * _channels);
         (*addr) = color.data;
+    }
+
+    std::ostream& operator<<(std::ostream& out, const Pixel& pixel) {
+        out << "(" << (int)pixel.components.r << "," << (int)pixel.components.g << "," << (int)pixel.components.b << "," << (int)pixel.components.a << ")";
+        return out;
     }
 }

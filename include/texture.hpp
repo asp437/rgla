@@ -29,6 +29,8 @@ namespace RGLA {
         }
     };
 
+    std::ostream& operator<<(std::ostream& out, const Pixel& pixel);
+
     class Texture {
     public:
         virtual ~Texture();
@@ -37,6 +39,12 @@ namespace RGLA {
         void UpdateData();
         void SetFilteringMode(TextureFilter filter);
         TextureFilter GetFilteringMode() const;
+
+        int GetChannels() const { return _channels; }
+        int GetWidth() const { return _width; }
+        int GetHeight() const { return _height; }
+
+        Pixel GetPixel(int x, int y) const;
 
     protected:
         Texture() = default;
@@ -59,9 +67,9 @@ namespace RGLA {
     class InMemoryTexture : public Texture {
     public:
         InMemoryTexture(const int width, const int height, const int channels);
+        InMemoryTexture(const Texture& texture);
         ~InMemoryTexture();
 
-        Pixel GetPixel(int x, int y) const;
         void SetPixel(int x, int y, Pixel color);
     private:
     };

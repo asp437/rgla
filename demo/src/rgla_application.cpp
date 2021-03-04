@@ -18,6 +18,7 @@ namespace RGLA {
                 _inMemoryTexture->SetPixel(x, y, 0xff000000);
             }
         }
+        _textureCopy = std::make_shared<InMemoryTexture>(*_texture);
 
         for (int x = 25; x <= 75; x++) {
             for (int y = 25; y <= 75; y++) {
@@ -28,6 +29,9 @@ namespace RGLA {
 
         _sprite = std::make_unique<Sprite>(_texture, _shader, Vec2{-0.5f, -0.5f});
         _sprite2 = std::make_unique<Sprite>(_inMemoryTexture, _shader, Vec2{-0.2f, -0.2f});
+        _sprite3 = std::make_unique<Sprite>(_textureCopy, _shader, Vec2{-0.7f, -0.1f});
+
+        _sprite3->SetFilteringMode(TextureFilter::TF_NEAREST);
         _sprite2->SetFilteringMode(TextureFilter::TF_NEAREST);
         _sprite->SetFilteringMode(TextureFilter::TF_LINEAR);
         SwitchBlending(true);
@@ -57,6 +61,7 @@ namespace RGLA {
         }
         _inMemoryTexture->UpdateData();
         _sprite2->Render();
+        _sprite3->Render();
 
         _window->SwapBuffers();
         return _window->ShouldBeClosed();
