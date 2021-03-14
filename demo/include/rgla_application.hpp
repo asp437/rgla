@@ -18,7 +18,10 @@ namespace RGLA {
         ~RGLAApplication();
 
         bool ProcessFrame() override;
+        void ProcessInput(KeyCode key, InputKeyStatus status);
     private:
+        bool _ShouldExit = false;
+
         std::shared_ptr<ShaderProgram> _shader;
         std::shared_ptr<Texture> _texture;
         std::shared_ptr<InMemoryTexture> _inMemoryTexture;

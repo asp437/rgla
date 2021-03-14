@@ -10,6 +10,7 @@ namespace RGLA {
         : Application(800, 600, "RGLA Demo")
     {
         _window->SetClearColor({0.2f, 0.3f, 0.3f, 1.0f});
+        _window->RegisterInputCallback(std::bind(&RGLAApplication::ProcessInput, this, std::placeholders::_1, std::placeholders::_2));
         _shader = std::make_shared<ShaderProgram>("shaders/basic.vs", "shaders/basic.fs");
         _texture = std::make_shared<FileTexture>("res/container.jpg");
         _inMemoryTexture = std::make_shared<InMemoryTexture>(100, 100, 4);
@@ -40,9 +41,14 @@ namespace RGLA {
     RGLAApplication::~RGLAApplication() {
     }
 
+    void RGLAApplication::ProcessInput(KeyCode key, InputKeyStatus status) {
+        if (key == KeyCode::ESCAPE && status == InputKeyStatus::RELEASE) {
+            _ShouldExit = true;
+        }
+    }
+
     bool RGLAApplication::ProcessFrame() {
         float time = glfwGetTime();
-        _window->ProcessInput();
 
         _window->ClearWindow();
 
@@ -64,6 +70,6 @@ namespace RGLA {
         _sprite3->Render();
 
         _window->SwapBuffers();
-        return _window->ShouldBeClosed();
+        return _window->ShouldBeClosed() || _ShouldExit;
     }
 }

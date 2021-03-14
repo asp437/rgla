@@ -26,6 +26,7 @@ add_library(
     src/texture.cpp
     src/math.cpp
     src/logging.cpp
+    src/scene.cpp
 )
 
 set_target_properties(rgla PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
@@ -37,6 +38,7 @@ find_package(glm REQUIRED)
 target_link_libraries(
     rgla
 
+    m
     glfw
     dl
     glm
@@ -48,12 +50,18 @@ target_include_directories(
     rgla
     SYSTEM
     PRIVATE
+
+    m
+    glm
+    glfw
+    dl
+    OpenGL::GL
     ${EXTERNAL_INCLUDES}
 )
 
 target_include_directories(
     rgla
-    PRIVATE
+    PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
