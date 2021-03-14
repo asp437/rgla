@@ -61,7 +61,6 @@ namespace RGLA {
     public:
         FileTexture(const std::string& fileName, bool flipVertical = false);
         ~FileTexture();
-    private:
     };
 
     class InMemoryTexture : public Texture {
@@ -71,6 +70,5 @@ namespace RGLA {
         ~InMemoryTexture();
 
         void SetPixel(int x, int y, Pixel color);
-    private:
     };
 }

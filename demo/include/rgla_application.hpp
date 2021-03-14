@@ -7,6 +7,7 @@
 #include <shader.hpp>
 #include <texture.hpp>
 #include <sprite.hpp>
+#include <scene.hpp>
 
 #include <vector>
 #include <memory>
@@ -26,8 +27,11 @@ namespace RGLA {
         std::shared_ptr<Texture> _texture;
         std::shared_ptr<InMemoryTexture> _inMemoryTexture;
         std::shared_ptr<InMemoryTexture> _textureCopy;
-        std::unique_ptr<Sprite> _sprite;
-        std::unique_ptr<Sprite> _sprite2;
-        std::unique_ptr<Sprite> _sprite3;
+
+        std::shared_ptr<Sprite> _sprite;
+        std::shared_ptr<Sprite> _sprite2;
+        std::shared_ptr<Sprite> _sprite3;
+
+        std::unique_ptr<Scene> _scene;
     };
 }

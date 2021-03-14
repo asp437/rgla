@@ -5,8 +5,14 @@
 #include "texture.hpp"
 
 namespace RGLA {
+    class ISpriteBase {
+    public:
+        virtual void Render() const = 0;
+        virtual void Render(Vec2f offset) const = 0;
+    };
+
     template<class Quad>
-    class SpriteBase : public Quad {
+    class SpriteBase : public Quad, public ISpriteBase {
     public:
         SpriteBase() : SpriteBase(nullptr) {}
         SpriteBase(
@@ -18,11 +24,19 @@ namespace RGLA {
             , _shader(shader)
         {}
 
-        void Render() const {
+        void Render() const override {
             if (_shader) {
                 _shader->SetFloat("brightness", _brightness);
                 _shader->SetFloat("opaque", _opaque);
                 Quad::Render(*_shader);
+            }
+        }
+
+        void Render(Vec2f offset) const override {
+            if (_shader) {
+                _shader->SetFloat("brightness", _brightness);
+                _shader->SetFloat("opaque", _opaque);
+                Quad::Render(*_shader, offset);
             }
         }
 
@@ -59,5 +73,4 @@ namespace RGLA {
     };
 
     using Sprite = SpriteBase<TexturedQuad>;
-    using DynamicSprite = SpriteBase<TexturedQuadDynamic>;
 }

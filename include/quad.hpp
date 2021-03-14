@@ -2,6 +2,9 @@
 
 #include "mesh.hpp"
 #include "shader.hpp"
+#include "texture.hpp"
+
+#include <memory>
 
 namespace RGLA {
     class Quad {
@@ -29,8 +32,8 @@ namespace RGLA {
             : Quad(Vec2{0.0f, 0.0f})
         {}
 
-        void Render(ShaderProgram& shader) const {
-            PrepareRender(shader);
+        void Render(ShaderProgram& shader, Vec2f offset = {0.0f, 0.0f}) const {
+            PrepareRender(shader, offset);
             _mesh.Render();
         }
 
@@ -49,11 +52,11 @@ namespace RGLA {
             _position = position;
         }
     protected:
-        virtual void PrepareRender(ShaderProgram& shader) const {
+        virtual void PrepareRender(ShaderProgram& shader, Vec2f offset) const {
             shader.Use();
             TransformMatrix transform;
             transform.Scale(Vec3{_size.x, _size.y, 1.0f});
-            transform.Translate(Vec3{_position.x, _position.y, 1.0f});
+            transform.Translate(Vec3{_position.x - offset.x, _position.y - offset.y, 1.0f});
             shader.SetMat4("transform", transform);
         }
 
@@ -78,18 +81,12 @@ namespace RGLA {
         {}
 
     protected:
-        void PrepareRender(ShaderProgram& shader) const override {
-            Quad::PrepareRender(shader);
+        void PrepareRender(ShaderProgram& shader, Vec2f offset = {0.0f, 0.0f}) const override {
+            Quad::PrepareRender(shader, offset);
             _texture->Use(0);
             shader.SetInt("tex", 0);
         }
 
         std::shared_ptr<Texture> _texture;
-    };
-
-    // TODO: Reload texture every frame
-    class TexturedQuadDynamic : public TexturedQuad {
-    public:
-        using TexturedQuad::TexturedQuad;
     };
 }

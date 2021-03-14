@@ -28,14 +28,19 @@ namespace RGLA {
         }
         _inMemoryTexture->UpdateData();
 
-        _sprite = std::make_unique<Sprite>(_texture, _shader, Vec2{-0.5f, -0.5f});
-        _sprite2 = std::make_unique<Sprite>(_inMemoryTexture, _shader, Vec2{-0.2f, -0.2f});
-        _sprite3 = std::make_unique<Sprite>(_textureCopy, _shader, Vec2{-0.7f, -0.1f});
+        _sprite = std::make_shared<Sprite>(_texture, _shader, Vec2{0.0f, 0.0f});
+        _sprite2 = std::make_shared<Sprite>(_inMemoryTexture, _shader, Vec2{0.2f, 0.2f});
+        _sprite3 = std::make_shared<Sprite>(_textureCopy, _shader, Vec2{0.8f, 0.1f});
 
         _sprite3->SetFilteringMode(TextureFilter::TF_NEAREST);
         _sprite2->SetFilteringMode(TextureFilter::TF_NEAREST);
         _sprite->SetFilteringMode(TextureFilter::TF_LINEAR);
         SwitchBlending(true);
+
+        _scene = std::make_unique<Scene>();
+        _scene->AddSprite(_sprite);
+        _scene->AddSprite(_sprite2);
+        _scene->AddSprite(_sprite3);
     }
 
     RGLAApplication::~RGLAApplication() {
@@ -45,6 +50,17 @@ namespace RGLA {
         if (key == KeyCode::ESCAPE && status == InputKeyStatus::RELEASE) {
             _ShouldExit = true;
         }
+        if (status == InputKeyStatus::PRESS || status == InputKeyStatus::REPEAT) {
+            if (key == KeyCode::LEFT) {
+                _scene->Position.x -= 0.01f;
+            } else if (key == KeyCode::RIGHT) {
+                _scene->Position.x += 0.01f;
+            } else if (key == KeyCode::DOWN) {
+                _scene->Position.y -= 0.01f;
+            } else if (key == KeyCode::UP) {
+                _scene->Position.y += 0.01f;
+            }
+        }
     }
 
     bool RGLAApplication::ProcessFrame() {
@@ -53,7 +69,6 @@ namespace RGLA {
         _window->ClearWindow();
 
         _sprite->SetOpaque((sin(time) / 2.0f) + 0.5f);
-        _sprite->Render();
 
         for (int x = 25; x <= 50; x++) {
             for (int y = 25; y <= 50; y++) {
@@ -66,8 +81,7 @@ namespace RGLA {
             }
         }
         _inMemoryTexture->UpdateData();
-        _sprite2->Render();
-        _sprite3->Render();
+        _scene->Render();
 
         _window->SwapBuffers();
         return _window->ShouldBeClosed() || _ShouldExit;
